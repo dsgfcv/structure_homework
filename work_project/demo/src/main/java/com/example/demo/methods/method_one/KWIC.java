@@ -15,20 +15,15 @@ public class KWIC {
     private static ArrayList<String> kwicList = new ArrayList<String>();
     private static ArrayList<String> lineTxt = new ArrayList<String>();
     private static BufferedReader inputFile;
-    // private static BufferedWriter outputFile;
-
-    // public static void main(String[] args) {
-    //     input("work_project\\demo\\src\\main\\java\\com\\example\\demo\\methods\\method_one\\input.txt");
-    //     shift();
-    //     alphabetizer();
-    //     System.out.println(output()); 
-    // }
 
     public static Result<String> process(){
+        System.out.println("start processing......");
         input("work_project\\demo\\src\\main\\java\\com\\example\\demo\\methods\\method_one\\input.txt");
         shift();
         alphabetizer();
-        return output();
+        Result<String> res = output();
+        System.out.println("result is: \n" + res);
+        return res;
     }
 
     public static void input(String fileName) {

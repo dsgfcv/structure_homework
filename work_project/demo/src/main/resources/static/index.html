@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <h2>KWIC系统</h2>
+        <div>
+            <ul class="type">
+                <li class="current">主程序-子程序</li>
+                <li>面向对象</li>
+                <li>事件系统</li>
+                <li>管道-过滤器</li>
+            </ul>
+            <div class="detail right">
+                <div class="upload">
+                    <input oninput="handleFileChange(this)" type="file" name="file" multiple="multiple" accept=".txt"></input>
+                    <div id='content'></div>
+                </div>
+                <ul class="desc">
+                    <li class="current">
+                        <p>软件体系结构中主程序—子程序体系结构是较简单的结构，其组件是主程序和子程序，连接件是调用返回机制。</p>
+                        <img src="./img/主子1.png" />
+                        <img src="./img/主子2.png" />
+                        <p>实例代码如下</p>
+                        <pre>
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+
+import com.example.demo.result.Result;
+
+public class KWIC {
+    private static ArrayList<String> kwicList = new ArrayList<String>();
+    private static ArrayList<String> lineTxt = new ArrayList<String>();
+    private static BufferedReader inputFile;
+
+    public static Result<String> process(){
+        System.out.println("start processing......");
+        input("work_project\\demo\\src\\main\\java\\com\\example\\demo\\methods\\method_one\\input.txt");
+        shift();
+        alphabetizer();
+        Result<String> res = output();
+        System.out.println("result is：\n" + res);
+        return res;
+    }
+
+    public static void input(String fileName) {
+        try {
+            inputFile = new BufferedReader(new FileReader(fileName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String line;
+        try {
+            while ((line = inputFile.readLine()) != null) {
+                lineTxt.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static Result<String> output(){
+        String res = "";
+        Iterator<String> it = kwicList.iterator();
+        while (it.hasNext()) {
+            res += it.next() + "\n";
+        }
+        return Result.success(res);
+    }
+
+    public static void shift() {
+        Iterator<String> it = lineTxt.iterator();
+        while (it.hasNext()) {
+            StringTokenizer token = new StringTokenizer(it.next());
+            ArrayList<String> tokens = new ArrayList<String>();
+            int i = 0;
+  
+            int count = token.countTokens();
+            while (i < count) {
+                tokens.add(token.nextToken());
+                i++;
+            }
+
+            for (i = 0; i < count; i++) {
+                StringBuffer lineBuffer = new StringBuffer();
+                int index = i;
+                for (int f = 0; f < count; f++) {
+               
+                    if (index >= count)
+                        index = 0;
+                    lineBuffer.append(tokens.get(index));
+                    lineBuffer.append(" ");
+                    index++;
+                }
+                String tmp = lineBuffer.toString();
+                kwicList.add(tmp);
+            }
+        }
+
+    }
+
+
+    public static void alphabetizer() {
+        Collections.sort(kwicList, new AlphabetizerComparator());
+    }
+
+    private static class AlphabetizerComparator implements Comparator<String> {
+        @Override
+        public int compare(String o1, String o2) {
+            if (o1 == null && o2 == null) {
+                throw new NullPointerException();
+            }
+            int compareValue = 0;
+            char o1c = o1.toLowerCase().charAt(0); 
+            char o2c = o2.toLowerCase().charAt(0); 
+            compareValue = o1c - o2c;
+            return compareValue;
+        }
+
+    }
+}
+
+                        </pre>
+                    </li>
+                    <li>
+                        <p>面向对象×体系结构风格的组件是类和对象。</p>
+                        <p>连接件是对象之间通过功能与函数调用实现交互。对象是通过函数和过程的调用-返回机制来交互的，而类是通过定义对象，再采用调用-返回机制进行交互。</p>
+                        <img src="./img/对象2.png" />
+                        <img src="./img/对象3.png" />
+                    </li>
+                    <li>
+                        <p>事件:能够激活对象功能的动作，当发生动作后会给所涉及对象发送一条消息，对象便可执行相应的功能。</p>
+                        <p>事件系统主要分为隐式调用和显示调用两种</p>
+                        <p>隐式调用:</p>
+                        <p>
+                        1.事件的触发者不知道那些构件会被影响，相互独立    
+                        2.不能假设构件的处理顺序，甚至不知道哪些构件或过程会被调用
+                        3.在整个系统中，各个构件之间无联系，各自独立，通过对事件的发布和注册实现关联
+                        </p>
+                        <img src="./img/事件1.png" />
+                        <img src="./img/事件3.png" />
+                    </li>
+                    <li>
+                        <img src="./img/管道过滤风格1.png" />
+                        <img src="./img/管道过滤风格2.png" />
+                        <img src="./img/管道过滤风格3.png" />
+                        <img src="./img/管道过滤风格4.png" />
+                        <img src="./img/管道过滤风格5.png" />
+                        <img src="./img/管道过滤风格6.png" />
+                        <img src="./img/管道过滤风格7.png" />
+                        <img src="./img/管道过滤风格8.png" />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/1.1.2/axios.min.js"></script>
+    <script src="./js/index.js"></script>
+</body>
+
+</html>

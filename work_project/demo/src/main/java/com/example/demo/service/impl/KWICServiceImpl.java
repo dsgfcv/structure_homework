@@ -16,17 +16,12 @@ import com.example.demo.service.KWICService;
 @Service
 public class KWICServiceImpl implements KWICService{
 
-    public static void main(String[] args) throws IOException{
-
-    }
-
     @Override
     public Result<String> process(MultipartFile file) {
         try {
-            File f = new File("D:\\CodeFiled\\Java_Single\\work_project\\demo\\src\\main\\java\\com\\example\\demo\\methods\\method_one\\", "input.txt");
+            System.out.println("recieved file: " + file.getOriginalFilename());
+            File f = new File("D:\\CodeFiled\\Java_Work\\work_project\\demo\\src\\main\\java\\com\\example\\demo\\methods\\method_one\\", "input.txt");
             file.transferTo(f);
-
-
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
         } catch (IllegalStateException e) {

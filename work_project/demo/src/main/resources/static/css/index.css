@@ -1,0 +1,77 @@
+html,
+body,
+ul,
+li,
+h2 {
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+.right {
+    float: right;
+}
+
+h2 {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.type .current {
+    background: rgb(172, 220, 250);
+    color: #fff;
+}
+
+.detail .current {
+    display: block;
+}
+
+.container {
+    min-height: 100vh;
+    background: rgb(205, 236, 255);
+}
+
+.container>div {
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.type {
+    width: 140px;
+    background-color: rgb(155, 214, 252);
+    text-align: center;
+    border-radius: 0 5px 5px 0;
+    position: fixed;
+    left: 0;
+    top: 80px;
+}
+
+.type li {
+    line-height: 40px;
+}
+
+.detail {
+    width: calc(100% - 140px);
+    box-sizing: border-box;
+    padding: 0 30px;
+}
+
+.detail li {
+    display: none;
+}
+
+.upload>div {
+    border: 1px solid #fff;
+    margin: 20px 0;
+    box-sizing: border-box;
+    padding: 10px;
+    display: none;
+}
+
+img {
+    width: 300px;
+    height: 250px;
+}
